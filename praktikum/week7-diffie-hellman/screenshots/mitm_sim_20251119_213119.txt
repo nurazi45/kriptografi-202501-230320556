@@ -1,0 +1,27 @@
+Waktu: 2025-11-19T21:31:19.369418
+-- SIMULASI MAN-IN-THE-MIDDLE (MITM) --
+p = 23, g = 5
+
+Alice:
+  private a = 7
+  original public A = 17
+
+Bob:
+  private b = 11
+  original public B = 22
+
+Eve (penyerang):
+  private e1 = 12
+  private e2 = 8
+  A_eve (yang dikirim ke Bob) = 18
+  B_eve (yang dikirim ke Alice) = 16
+
+Shared keys yang dihitung (hasil akhir di masing-masing pihak):
+  Alice menghitung shared (dengan B_eve) = 18
+  Bob menghitung shared (dengan A_eve)   = 1
+
+Shared keys yang dimiliki Eve:
+  Eve <-> Alice (menggunakan e1) = 6
+  Eve <-> Bob   (menggunakan e2) = 1
+
+Catatan: Jika SE_with_alice == SA atau SE_with_bob == SB, Eve berhasil memperoleh shared key.

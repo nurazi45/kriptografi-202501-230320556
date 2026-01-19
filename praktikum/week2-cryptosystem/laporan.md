@@ -1,20 +1,26 @@
 # Laporan Praktikum Kriptografi
-Minggu ke-: X  
-Topik: [judul praktikum]  
-Nama: [Nama Mahasiswa]  
-NIM: [NIM Mahasiswa]  
-Kelas: [Kelas]  
+Minggu ke-: 2 
+Topik: crytosystem
+Nama: Nur Azizah 
+NIM: 230320556  
+Kelas: 5dsra  
 
 ---
 
 ## 1. Tujuan
-(Tuliskan tujuan pembelajaran praktikum sesuai modul.)
+Setelah mengikuti praktikum ini, mahasiswa diharapkan mampu:
+
+Mengidentifikasi komponen dasar kriptosistem (plaintext, ciphertext, kunci, algoritma).
+Menggambarkan proses enkripsi dan dekripsi sederhana.
+Mengklasifikasikan jenis kriptosistem (simetris dan asimetris).
+
 
 ---
 
 ## 2. Dasar Teori
-(Ringkas teori relevan (cukup 2–3 paragraf).  
-Contoh: definisi cipher klasik, konsep modular aritmetika, dll.  )
+Cipher klasik merupakan teknik penyandian pesan yang digunakan pada masa awal perkembangan kriptografi. Prinsip dasarnya adalah mengganti atau mengacak huruf dalam pesan asli (plaintext) menjadi bentuk lain (ciphertext) menggunakan aturan tertentu agar isi pesan tidak mudah dipahami oleh pihak yang tidak berwenang. Beberapa contoh cipher klasik adalah Caesar Cipher, yang menggeser setiap huruf dengan jumlah tertentu dalam alfabet, dan Vigenère Cipher, yang menggunakan kunci berupa kata untuk melakukan pergeseran huruf secara berulang.
+
+Konsep penting dalam cipher klasik adalah aritmetika modular, yaitu operasi matematika yang dilakukan dalam sistem bilangan tertentu (modulo n). Dalam konteks kriptografi, modular aritmetika digunakan untuk melakukan proses enkripsi dan dekripsi, seperti perhitungan pergeseran huruf. Misalnya, pada Caesar Cipher dengan pergeseran 3, huruf A (posisi 0) akan menjadi D (posisi (0+3) mod 26 = 3). Dengan konsep ini, proses penyandian dapat dilakukan secara sistematis dan mudah diimplementasikan dalam algoritma komputer.
 
 ---
 
@@ -41,10 +47,39 @@ Gunakan blok kode:
 
 ```python
 # contoh potongan kode
-def encrypt(text, key):
-    return ...
-```
-)
+# file: praktikum/week2-cryptosystem/src/simple_crypto.py
+
+def encrypt(plaintext, key):
+    result = ""
+    for char in plaintext:
+        if char.isalpha():
+            shift = 65 if char.isupper() else 97
+            result += chr((ord(char) - shift + key) % 26 + shift)
+        else:
+            result += char
+    return result
+
+def decrypt(ciphertext, key):
+    result = ""
+    for char in ciphertext:
+        if char.isalpha():
+            shift = 65 if char.isupper() else 97
+            result += chr((ord(char) - shift - key) % 26 + shift)
+        else:
+            result += char
+    return result
+
+if __name__ == "__main__":
+    message = "<nim><nama>"
+    key = 5
+
+    enc = encrypt(message, key)
+    dec = decrypt(enc, key)
+
+    print("Plaintext :", message)
+    print("Ciphertext:", enc)
+    print("Decrypted :", dec)
+
 
 ---
 
